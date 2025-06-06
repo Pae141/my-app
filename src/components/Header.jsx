@@ -9,7 +9,7 @@ export default function Header({ user, setUser }) {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    fetch("https://paeproject.onrender.com/api/users/logout", {
+    fetch("https://my-backend-a4bd.onrender.com/api/users/logout", {
       method: "POST",
       credentials: "include",
     })
