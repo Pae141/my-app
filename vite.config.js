@@ -3,5 +3,5 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  base: '/my-app/', // ชื่อ repo
+  base: '/my-app/', // ใส่ชื่อ repo ของคุณ
 })

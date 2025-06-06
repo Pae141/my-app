@@ -1,35 +1,85 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
 
-function App() {
-  const [count, setCount] = useState(0)
+import Login from "./pages/Login";
+import Home from "./pages/Home";
+import Layout from './components/Layout';
+import Register from "./pages/Register";
+import UserProfile from "./pages/UserProfile";
+import SettingsPage from './pages/Settings';
+import ProtectedRoute from "./components/ProtectedRoute";
+
+
+
+export default function App() {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true); // wait for auth check
+
+ useEffect(() => {
+  const checkAuth = async () => {
+    try {
+      const res = await fetch("https://my-backend-a4bd.onrender.com/api/users/me", {
+        credentials: "include",
+      });
+      console.log("Status:", res.status);
+
+      if (!res.ok) throw new Error("Unauthorized");
+
+      const data = await res.json();
+      console.log("User data:", data);
+      setUser(data);
+    } catch (err) {
+      console.log("Auth error:", err.message);
+      setUser(null);
+    } finally {
+      setLoading(false);
+      console.log("Loading set to false");
+    }
+  };
+
+  checkAuth();
+}, []);
+  if (loading) return <div>Loading...</div>;
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+   
+      <Routes>
+        <Route path="/" element={<Login setUser={setUser} />} />
+        <Route path="/register" element={<Register />} />
+        <Route
+          path="/home"
+          element={
+            <ProtectedRoute user={user}>
+              <Layout setUser={setUser}>
+                <Home />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+        
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute user={user}>
+              <Layout setUser={setUser}>
+                <UserProfile />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/settings"
+          element={
+            <ProtectedRoute user={user}>
+              <Layout setUser={setUser}>
+                <SettingsPage />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
     </>
-  )
+  );
 }
-
-export default App
