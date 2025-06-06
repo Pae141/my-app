@@ -1,3 +1,8 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { FaUserCircle } from "react-icons/fa"; // ถ้าคุณใช้ไอคอนนี้ด้วย
+
+
 export default function Header({ user, setUser }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const toggleMenu = () => setMenuOpen(!menuOpen);
