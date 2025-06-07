@@ -9,19 +9,27 @@ export default function Header({ user, setUser }) {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    fetch("https://my-backend-a4bd.onrender.com/api/users/logout", {
-      method: "POST",
-      credentials: "include",
+  fetch("https://my-backend-a4bd.onrender.com/api/users/logout", {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => {
+      if (!res.ok) throw new Error("Logout failed");
+      return res.json();
     })
-      .then(() => {
-        setUser(null);
-        setMenuOpen(false);
-        navigate("/");
-      })
-      .catch((err) => {
-        console.error("Logout error", err);
-      });
-  };
+    .then(() => {
+      setUser(null);
+      setMenuOpen(false);
+      navigate("/");
+    })
+    .catch((err) => {
+      console.error("Logout error", err);
+    });
+};
+
 
   return (
     <>
