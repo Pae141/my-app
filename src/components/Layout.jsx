@@ -6,8 +6,7 @@ export default function Layout({ children, setUser }) {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Header fixed ด้านบน */}
-      <Header setUser={setUser} />
-
+       <Header user={user} setUser={setUser} />
       {/* spacer เพื่อดันทุกอย่างลงมาไม่ให้ทับ Header */}
       <div className="h-8" /> {/* ให้เท่ากับความสูงของ Header เช่น h-16 = 64px */}
 

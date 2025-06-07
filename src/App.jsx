@@ -51,7 +51,8 @@ export default function App() {
           path="/home"
           element={
             <ProtectedRoute user={user}>
-              <Layout setUser={setUser}>
+              <Layout user={user} setUser={setUser}>
+
                 <Home />
               </Layout>
             </ProtectedRoute>
@@ -62,7 +63,8 @@ export default function App() {
           path="/profile"
           element={
             <ProtectedRoute user={user}>
-              <Layout setUser={setUser}>
+              <Layout user={user} setUser={setUser}>
+
                 <UserProfile />
               </Layout>
             </ProtectedRoute>
@@ -72,7 +74,8 @@ export default function App() {
           path="/settings"
           element={
             <ProtectedRoute user={user}>
-              <Layout setUser={setUser}>
+              <Layout user={user} setUser={setUser}>
+
                 <SettingsPage />
               </Layout>
             </ProtectedRoute>
