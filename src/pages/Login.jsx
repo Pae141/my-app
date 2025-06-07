@@ -29,19 +29,27 @@ export default function Login({ setUser }) {
     setTestDialog(true);
   };
 
-  const handleSubmit = async (e) => {
+ const handleSubmit = async (e) => {
   e.preventDefault();
 
   try {
-    const response = await axios.post("https://my-backend-a4bd.onrender.com/api/users/login", {
-      username,
-      password
-    }, { withCredentials: true });  // ส่ง cookie ด้วย
+    // 1. login
+    const response = await axios.post(
+      "https://my-backend-a4bd.onrender.com/api/users/login",
+      { username, password },
+      { withCredentials: true }
+    );
 
     if (response.data.message === "Login successful") {
-      // ไม่ต้องเก็บ token ใน localStorage เพราะใช้ cookie httpOnly
-      setUser({ username }); // หรือข้อมูล user ที่ได้มา
-      setShowDialog(true);
+      // 2. ดึง user จาก cookie (เช่น /profile)
+      const profileRes = await axios.get(
+        "https://my-backend-a4bd.onrender.com/api/users/profile",
+        { withCredentials: true }
+      );
+
+      setUser(profileRes.data); // ✅ setUser จากข้อมูลจริง ไม่ใช่แค่ username
+
+      setShowDialog(true); // แสดง dialog สำเร็จ
     } else {
       setErrorDialog(true);
     }

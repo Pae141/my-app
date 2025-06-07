@@ -15,27 +15,29 @@ export default function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true); // wait for auth check
 
- useEffect(() => {
-  const checkAuth = async () => {
-    try {
-      const res = await fetch("https://my-backend-a4bd.onrender.com/api/users/me", {
-        credentials: "include",
-      });
-      console.log("Status:", res.status);
+   useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const res = await fetch("https://my-backend-a4bd.onrender.com/api/users/me", {
+          credentials: "include", // เพื่อส่ง cookie ไปด้วย
+        });
 
-      if (!res.ok) throw new Error("Unauthorized");
+        console.log("Status:", res.status);
 
-      const data = await res.json();
-      console.log("User data:", data);
-      setUser(data);
-    } catch (err) {
-      console.log("Auth error:", err.message);
-      setUser(null);
-    } finally {
-      setLoading(false);
-      console.log("Loading set to false");
-    }
-  };
+        if (!res.ok) throw new Error("Unauthorized");
+
+        const data = await res.json();
+        console.log("User data:", data);
+
+        setUser(data); // ตั้งค่าผู้ใช้จาก session cookie
+      } catch (err) {
+        console.log("Auth error:", err.message);
+        setUser(null);
+      } finally {
+        setLoading(false);
+        console.log("Loading set to false");
+      }
+    };
 
   checkAuth();
 }, []);
