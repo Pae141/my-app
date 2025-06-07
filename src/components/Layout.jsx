@@ -2,7 +2,7 @@ import Header from './Header';
 import Nav from './Nav';
 import Footer from './Footer';
 
-export default function Layout({ children, setUser }) {
+export default function Layout({ children, user, setUser }) {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Header fixed ด้านบน */}
