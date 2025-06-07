@@ -8,6 +8,11 @@ import Register from "./pages/Register";
 import UserProfile from "./pages/UserProfile";
 import SettingsPage from './pages/Settings';
 import ProtectedRoute from "./components/ProtectedRoute";
+import Tickets from "./pages/Ticket";
+import BookTicket from "./pages/Ticket/BookTicket";
+import SeatBooking from "./pages/Ticket/SeatBooking";
+import AddTicket from "./pages/Ticket/AddTicket";
+<components />
 
 
 
@@ -83,6 +88,22 @@ export default function App() {
             </ProtectedRoute>
           }
         />
+
+        <Route
+          path="/tickets"
+          element={
+            <ProtectedRoute user={user}>
+              <Layout user={user} setUser={setUser}>
+                <Tickets />
+              </Layout>
+            </ProtectedRoute>
+          }
+        >
+          <Route path="book" element={<BookTicket />} />
+          <Route path="seat" element={<SeatBooking />} />
+          <Route path="add" element={<AddTicket />} />
+        </Route>
+
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </>

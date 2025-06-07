@@ -12,6 +12,7 @@ export default function Layout({ children, user, setUser }) {
       <div className="h-8" /> {/* ให้เท่ากับความสูงของ Header เช่น h-16 = 64px */}
 
       <Nav />
+     
 
       <main className="flex-grow bg-gray-100 w-full">
         {children}

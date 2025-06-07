@@ -3,6 +3,7 @@ import { IoMdHome } from "react-icons/io";
 import { MdTempleBuddhist } from "react-icons/md";
 import { IoSettingsSharp } from "react-icons/io5";
 import { AiFillSignal } from "react-icons/ai";
+import { IoTicketSharp } from "react-icons/io5";
 
 export default function Nav() {
   const linkClass = ({ isActive }) =>
@@ -11,9 +12,9 @@ export default function Nav() {
 
   return (
     <>
-      <div className="bg-yellow-300 w-screen h-2 "></div>
+      <div className="bg-yellow-300 w-screen h-2 fixed top-16 "></div>
 
-      <div className="bg-blue-300 w-screen h-11 flex items-center justify-center ">
+      <div className="bg-blue-300 w-screen h-11 flex items-center justify-center fixed top-[4.5rem] ">
         <div className="flex items-center">
           {/* เมนู Home */}
           <NavLink to="/home" end className={linkClass}>
@@ -22,19 +23,25 @@ export default function Nav() {
           </NavLink>
 
           {/* เมนู Amulet */}
-          <NavLink to="/amulet" className={linkClass}>
+          <NavLink to="/#" className={linkClass}>
             <MdTempleBuddhist className="h-5 w-5" />
             <span>Amulet</span>
           </NavLink>
 
           {/* เมนู Dashboard */}
-          <NavLink to="/dashboard" className={linkClass}>
+          <NavLink to="/#" className={linkClass}>
             <AiFillSignal className="h-5 w-5" />
             <span>Dashboard</span>
           </NavLink>
 
+          {/* เมนู จองตั๋ว */}
+          <NavLink to="/tickets" className={linkClass}>
+            <IoTicketSharp className="h-5 w-5" />
+            <span>Tickets</span>
+          </NavLink>
+
           {/* เมนู Setting */}
-          <NavLink to="/settings" className={linkClass}>
+          <NavLink to="/#" className={linkClass}>
             <IoSettingsSharp className="h-5 w-5" />
             <span>ตั้งค่า</span>
           </NavLink>
