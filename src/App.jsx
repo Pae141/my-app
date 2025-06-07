@@ -12,7 +12,7 @@ import Tickets from "./pages/Ticket";
 import BookTicket from "./pages/Ticket/BookTicket";
 import SeatBooking from "./pages/Ticket/SeatBooking";
 import AddTicket from "./pages/Ticket/AddTicket";
-<components />
+
 
 
 
@@ -47,6 +47,9 @@ export default function App() {
   checkAuth();
 }, []);
   if (loading) return <div>Loading...</div>;
+
+  console.log("Current user:", user);
+
 
   return (
     <>

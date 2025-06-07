@@ -6,12 +6,10 @@ import { FaTrash } from "react-icons/fa";
 
 
 export default function SettingsPage() {
+  console.log("SettingsPage loaded");
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  const [user, setUser] = useState(null);
-
 
   useEffect(() => {
     fetchUsers();
@@ -44,13 +42,14 @@ export default function SettingsPage() {
 
   const confirmDelete = async () => {
     try {
-     const response = await fetch(`https://my-backend-a4bd.onrender.com/api/users/${selectedUserId}`, {
-      method: "DELETE",
-      credentials: "include",
-    });
+      const response = await fetch(`https://my-backend-a4bd.onrender.com/api/users/${selectedUserId}`, {
+        method: "DELETE",
+        credentials: "include",
+      });
 
       if (!response.ok) throw new Error("ลบผู้ใช้ไม่สำเร็จ");
 
+      // อัพเดต state โดย filter ออก user ที่ถูกลบ
       setUsers((prev) => prev.filter((user) => user.id !== selectedUserId));
       setShowConfirmDelete(false);
       setSelectedUserId(null);
@@ -66,12 +65,11 @@ export default function SettingsPage() {
 
   return (
     <div className="flex flex-col min-h-screen">
-     
-
       <main className="flex-grow p-6">
         <h1 className="text-2xl font-bold mb-4 text-center">จัดการผู้ใช้</h1>
 
-        {/* ... loading, error */}
+        {loading && <p>กำลังโหลดข้อมูล...</p>}
+        {error && <p className="text-red-500">เกิดข้อผิดพลาด: {error}</p>}
 
         {!loading && !error && (
           <div className="overflow-x-auto">
@@ -114,7 +112,6 @@ export default function SettingsPage() {
           </div>
         )}
 
-        {/* ยืนยันลบ */}
         {showConfirmDelete && (
           <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
             <div className="bg-white p-6 rounded shadow max-w-sm w-full">
@@ -137,7 +134,6 @@ export default function SettingsPage() {
           </div>
         )}
       </main>
-
     </div>
   );
-};
+}

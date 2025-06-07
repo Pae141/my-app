@@ -41,7 +41,7 @@ export default function Nav() {
           </NavLink>
 
           {/* เมนู Setting */}
-          <NavLink to="/#" className={linkClass}>
+          <NavLink to="/settings" className={linkClass}>
             <IoSettingsSharp className="h-5 w-5" />
             <span>ตั้งค่า</span>
           </NavLink>
