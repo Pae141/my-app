@@ -11,9 +11,9 @@ export default function Nav() {
 
   return (
     <>
-      <div className="bg-yellow-300 w-screen h-2"></div>
+      <div className="bg-yellow-300 w-screen h-2 fixed"></div>
 
-      <div className="bg-blue-300 w-screen h-11 flex items-center justify-center">
+      <div className="bg-blue-300 w-screen h-11 flex items-center justify-center fixed">
         <div className="flex items-center">
           {/* เมนู Home */}
           <NavLink to="/home" end className={linkClass}>
