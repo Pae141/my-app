@@ -3,11 +3,12 @@ import Sidebar from "../components/Ticket/Sidebar";
 
 export default function Tickets() {
   return (
-    <div className="flex h-[calc(100vh-4rem)]">
+    <div className="flex flex-grow min-h-0">
       <Sidebar />
       <div className="flex-1 p-6 overflow-auto">
-        <Outlet />  {/* แสดงหน้าลูกจาก route ที่ nested */}
+        <Outlet />
       </div>
     </div>
+
   );
 }
